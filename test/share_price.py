@@ -1,14 +1,16 @@
 
-Assets = 10000
-Shares = 732
+Assets = 1000000
+Shares = 7329
 Exchange = 5
 
+Iterations = 18
 
+# Convergent calculation of share price without division.
 def share_price(_assets : int, _shares : int) -> int :
 	low = 0
 	high = _assets
 
-	for _i in range(100):
+	for _i in range(Iterations):
 		mid = (low + high) // 2
 		if mid * _shares < _assets:
 			low = mid
@@ -17,5 +19,11 @@ def share_price(_assets : int, _shares : int) -> int :
 
 	return (low + high) // 2
 
+convergent_price = share_price(Assets, Shares)
+actual_price = Assets // Shares
+diff = abs(convergent_price - actual_price)
+percentage = diff / actual_price
+print("%s assets with %s shares is %s per share." % (Assets, Shares, convergent_price))
+print("Actual value should be %s." % (actual_price))
+print("Difference is %s%%." % (percentage))
 
-print("%s assets with %s shares is %s per share." % (Assets, Shares, share_price(Assets, Shares)))
