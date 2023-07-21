@@ -12,7 +12,11 @@ def share_price(_assets : int, _shares : int) -> int :
 
 	for _i in range(Iterations):
 		mid = (low + high) // 2
-		if mid * _shares < _assets:
+		new_guess = mid * _shares
+		if new_guess == _assets: 
+			print("Converged @ %s!" % (_i))
+			break
+		if new_guess < _assets:
 			low = mid
 		else:
 			high = mid
